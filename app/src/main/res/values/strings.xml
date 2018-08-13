@@ -148,4 +148,5 @@
     <string name="gps_permission_title">Turn On GPS</string>
     <string name="gps_permission_message">Hi there! Please turn on GPS to detect current location.</string>
     <string name="retry">Retry</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
