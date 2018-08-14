@@ -1,6 +1,7 @@
 package com.example.mohamed.reachyourspot.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mohamed.reachyourspot.R;
+import com.example.mohamed.reachyourspot.activities.MapsActivity;
+import com.example.mohamed.reachyourspot.utils.Constants;
 import com.example.mohamed.reachyourspot.utils.PlaceDetailProvider;
 import com.example.mohamed.reachyourspot.utils.Utilities;
 
@@ -98,6 +101,14 @@ public class MainSpotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     locationTag = "police";
                 else
                     locationTag = locationTag.replace(' ', '_').toLowerCase();
+
+
+                // Intent to start Maps activity with locationTag as extra data.
+
+                Intent intent = new Intent(mContext, MapsActivity.class);
+                intent.putExtra(Constants.LOCATION_NAME_EXTRA_TEXT,PlaceDetailProvider.popularPlaceTagName[mItemPosition]);
+                intent.putExtra(Constants.LOCATION_TYPE_EXTRA_TEXT,locationTag);
+                mContext.startActivity(intent);
 
             }else {
                 Snackbar.make(mPlaceImageView, R.string.no_connection_string,

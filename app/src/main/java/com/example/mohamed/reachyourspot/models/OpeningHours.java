@@ -13,9 +13,6 @@ public class OpeningHours implements Parcelable
     public final static Parcelable.Creator<OpeningHours> CREATOR = new Creator<OpeningHours>() {
 
 
-        @SuppressWarnings({
-            "unchecked"
-        })
         public OpeningHours createFromParcel(Parcel in) {
             OpeningHours instance = new OpeningHours();
             instance.openNow = ((boolean) in.readValue((boolean.class.getClassLoader())));

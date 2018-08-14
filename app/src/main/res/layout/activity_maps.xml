@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activities.MapsActivity"
     android:layout_height="match_parent"
@@ -58,10 +57,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dimen_16dp"
                 android:layout_marginStart="@dimen/dimen_16dp"
                 android:layout_toEndOf="@+id/place_list_icon_view"
-                android:layout_toRightOf="@+id/place_list_icon_view"
                 android:maxLines="1"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/size_20sp"

@@ -1,6 +1,7 @@
 package com.example.mohamed.reachyourspot.activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -13,6 +14,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import retrofit2.Call;
@@ -24,6 +28,7 @@ import com.example.mohamed.reachyourspot.Retrofit.RetrofitInterface;
 import com.example.mohamed.reachyourspot.Retrofit.ServiceGenerator;
 import com.example.mohamed.reachyourspot.models.Location;
 import com.example.mohamed.reachyourspot.models.MyPlace;
+import com.example.mohamed.reachyourspot.models.Place;
 import com.example.mohamed.reachyourspot.models.Result;
 import com.example.mohamed.reachyourspot.utils.Constants;
 import com.google.android.gms.common.ConnectionResult;
@@ -42,6 +47,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -57,7 +64,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Marker mMarker;
     private LocationRequest mLocationRequest;
     private String mLocationName;
+    private String mLocationTag;
 
+    /**
+     * ArrayList to store the Near By Place List
+     */
+    private ArrayList<Place> mNearByPlaceArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +80,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        mLocationName = "market";
+        mLocationTag = getIntent().getStringExtra(Constants.LOCATION_TYPE_EXTRA_TEXT);
+        mLocationName = getIntent().getStringExtra(Constants.LOCATION_NAME_EXTRA_TEXT);
 
-        
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
@@ -84,9 +96,41 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         actionBar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((TextView) findViewById(R.id.place_list_placeholder_text_view))
+                .setText(getResources().getString(R.string.near_by_tag) + " " + mLocationName +
+                        " " + getString(R.string.list_tag));
 
-        nearByPlace("school");
+        nearByPlace(mLocationTag);
 
+
+        findViewById(R.id.place_list_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(v.getContext(),"Here",Toast.LENGTH_SHORT).show();
+                for (int i = 0 ; i <mNearByPlaceArrayList.size();i++){
+                    Log.d("Test", mNearByPlaceArrayList.get(i).getPlaceName());
+                }
+
+//                Intent placeDetailTransferIntent = new Intent(PlaceListOnMapActivity.this, PlaceListActivity.class);
+//                placeDetailTransferIntent.putParcelableArrayListExtra(
+//                        GoogleApiUrl.ALL_NEARBY_LOCATION_KEY, mNearByPlaceArrayList);
+//                placeDetailTransferIntent.putExtra(GoogleApiUrl.LOCATION_TYPE_EXTRA_TEXT, mLocationTag);
+//                placeDetailTransferIntent.putExtra(GoogleApiUrl.LOCATION_NAME_EXTRA_TEXT, mLocationName);
+//                startActivity(placeDetailTransferIntent);
+//                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_in);
+            }
+        });
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void nearByPlace(String placeType) {
@@ -134,12 +178,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             mMap.addMarker(markerOptions);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(ZoomingValue));
+
+            String status= "Status Not Available";
+            if(googlePlaces.getOpeningHours().isOpenNow())
+                 status= "open_now";
+
+
+            Place singlePlace = new Place(
+                googlePlaces.getPlaceId(), lat,lng,placeName,status,
+                    googlePlaces.getRating(),vicinity
+            );
+
+            mNearByPlaceArrayList.add(singlePlace);
+
         }
     }
 
     /**
-     * https://maps.googleapis.com/maps/api/place/nearbysearch/json?
-     * location=30.3280983,-81.4855&radius=10000&type=market&sensor=true&key=AIzaSyDGaOnd40WcRJaSrNNrqdOBtXwip95KPDI
+     * https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=30.3280983,-81.4855&radius=10000&type=market&sensor=true&key=AIzaSyDGaOnd40WcRJaSrNNrqdOBtXwip95KPDI
      **/
     private String getUrl(double latitude, double longitude, String placeType) {
         StringBuilder googlePlaceUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
