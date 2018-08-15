@@ -59,7 +59,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
 
-    private double latitude=30.0316702, longitude=31.2408997;
+    //private double latitude=30.0316702, longitude=31.2408997;
+    private double latitude, longitude;
+
     private Location mLastlocation;
     private Marker mMarker;
     private LocationRequest mLocationRequest;
@@ -100,25 +102,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .setText(getResources().getString(R.string.near_by_tag) + " " + mLocationName +
                         " " + getString(R.string.list_tag));
 
-        nearByPlace(mLocationTag);
 
 
         findViewById(R.id.place_list_view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(v.getContext(),"Here",Toast.LENGTH_SHORT).show();
-                for (int i = 0 ; i <mNearByPlaceArrayList.size();i++){
-                    Log.d("Test", mNearByPlaceArrayList.get(i).getPlaceName());
-                }
+                Intent intent = new Intent(v.getContext(),NearPlacesList.class);
 
-//                Intent placeDetailTransferIntent = new Intent(PlaceListOnMapActivity.this, PlaceListActivity.class);
-//                placeDetailTransferIntent.putParcelableArrayListExtra(
-//                        GoogleApiUrl.ALL_NEARBY_LOCATION_KEY, mNearByPlaceArrayList);
-//                placeDetailTransferIntent.putExtra(GoogleApiUrl.LOCATION_TYPE_EXTRA_TEXT, mLocationTag);
-//                placeDetailTransferIntent.putExtra(GoogleApiUrl.LOCATION_NAME_EXTRA_TEXT, mLocationName);
-//                startActivity(placeDetailTransferIntent);
-//                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_in);
+                intent.putParcelableArrayListExtra(
+                        Constants.ALL_NEARBY_LOCATION_KEY, mNearByPlaceArrayList);
+                intent.putExtra(Constants.LOCATION_TYPE_EXTRA_TEXT, mLocationTag);
+                intent.putExtra(Constants.LOCATION_NAME_EXTRA_TEXT, mLocationName);
+                intent.putExtra(Constants.CURRENT_LOCATION_LAT,latitude);
+                intent.putExtra(Constants.CURRENT_LOCATION_lNG,longitude);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_in);
             }
         });
 
@@ -133,17 +132,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return super.onOptionsItemSelected(item);
     }
 
-    private void nearByPlace(String placeType) {
+    private void nearByPlace(Double lat,Double lng,String placeType) {
         if (mMap != null)
             mMap.clear();
-        String url = getUrl(latitude, longitude, placeType);
+        String url = getUrl(lat, lng, placeType);
         RetrofitInterface mService=
                 ServiceGenerator.createService(RetrofitInterface.class);
+
+        Log.d("here", url);
 
         mService.getPlaces(url).enqueue(new Callback<MyPlace>() {
             @Override
             public void onResponse(@NonNull Call<MyPlace> call, @NonNull Response<MyPlace> response) {
-                Log.d("eshta", Integer.toString(response.body().getResults().size()));
+                Log.d("here", Integer.toString(response.body().getResults().size()));
                 if (response.isSuccessful()) {
                     addMarksOnMap(response.body());
                 }
@@ -180,7 +181,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             mMap.animateCamera(CameraUpdateFactory.zoomTo(ZoomingValue));
 
             String status= "Status Not Available";
-            if(googlePlaces.getOpeningHours().isOpenNow())
+            if( googlePlaces.getOpeningHours()!=null && googlePlaces.getOpeningHours().isOpenNow())
                  status= "open_now";
 
 
@@ -277,6 +278,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         mMap.getUiSettings().isMyLocationButtonEnabled();
+        //nearByPlace(mLocationTag);
+
 
     }
     private synchronized void buildGoogleApiClient() {
@@ -335,6 +338,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Move Camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(ZoomingValue));
+        nearByPlace(location.getLatitude(),location.getLongitude(),mLocationTag);
 
         if (mGoogleApiClient !=null)
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient,this);
