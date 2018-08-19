@@ -1,55 +1,50 @@
-
 package com.example.mohamed.reachyourspot.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class OpeningHours implements Parcelable
-{
+public class OpeningHours{
 
-    @SerializedName("open_now")
-    private boolean openNow;
-    public final static Parcelable.Creator<OpeningHours> CREATOR = new Creator<OpeningHours>() {
+	@SerializedName("open_now")
+	private boolean openNow;
 
+	@SerializedName("periods")
+	private List<PeriodsItem> periods;
 
-        public OpeningHours createFromParcel(Parcel in) {
-            OpeningHours instance = new OpeningHours();
-            instance.openNow = ((boolean) in.readValue((boolean.class.getClassLoader())));
-            return instance;
-        }
+	@SerializedName("weekday_text")
+	private List<String> weekdayText;
 
-        public OpeningHours[] newArray(int size) {
-            return (new OpeningHours[size]);
-        }
+	public void setOpenNow(boolean openNow){
+		this.openNow = openNow;
+	}
 
-    }
-    ;
+	public boolean isOpenNow(){
+		return openNow;
+	}
 
-    /**
-     * 
-     * @return
-     *     The openNow
-     */
-    public boolean isOpenNow() {
-        return openNow;
-    }
+	public void setPeriods(List<PeriodsItem> periods){
+		this.periods = periods;
+	}
 
-    /**
-     * 
-     * @param openNow
-     *     The open_now
-     */
-    public void setOpenNow(boolean openNow) {
-        this.openNow = openNow;
-    }
+	public List<PeriodsItem> getPeriods(){
+		return periods;
+	}
 
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(openNow);
-    }
+	public void setWeekdayText(List<String> weekdayText){
+		this.weekdayText = weekdayText;
+	}
 
-    public int describeContents() {
-        return  0;
-    }
+	public List<String> getWeekdayText(){
+		return weekdayText;
+	}
 
+	@Override
+ 	public String toString(){
+		return 
+			"OpeningHours{" + 
+			"open_now = '" + openNow + '\'' + 
+			",periods = '" + periods + '\'' + 
+			",weekday_text = '" + weekdayText + '\'' + 
+			"}";
+		}
 }

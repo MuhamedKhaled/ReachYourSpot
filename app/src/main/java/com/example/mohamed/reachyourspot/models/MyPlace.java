@@ -12,16 +12,18 @@ public class MyPlace implements Parcelable
 {
 
     @SerializedName("html_attributions")
-
     private ArrayList<String> htmlAttributions = new ArrayList<String>();
-    @SerializedName("next_page_token")
 
+    @SerializedName("next_page_token")
     private String nextPageToken;
+
     @SerializedName("results")
     private ArrayList<Result> results = new ArrayList<Result>();
-    @SerializedName("status")
 
+    @SerializedName("status")
     private String status;
+
+
     public final static Parcelable.Creator<MyPlace> CREATOR = new Creator<MyPlace>() {
 
 

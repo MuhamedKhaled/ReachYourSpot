@@ -1,350 +1,267 @@
-
 package com.example.mohamed.reachyourspot.models;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result implements Parcelable
-{
+public class Result{
 
-    @SerializedName("geometry")
+	@SerializedName("utc_offset")
+	private int utcOffset;
 
-    private Geometry geometry;
-    @SerializedName("icon")
+	@SerializedName("formatted_address")
+	private String formattedAddress;
 
-    private String icon;
-    @SerializedName("id")
+	@SerializedName("types")
+	private ArrayList<String> types;
 
-    private String id;
-    @SerializedName("name")
-    private String name;
-    @SerializedName("photos")
-    private List<Photo> photos = new ArrayList<Photo>();
-    @SerializedName("place_id")
-    private String placeId;
-    @SerializedName("reference")
-    private String reference;
-    @SerializedName("scope")
-    private String scope;
-    @SerializedName("types")
-    private List<String> types = new ArrayList<String>();
-    @SerializedName("vicinity")
-    private String vicinity;
-    @SerializedName("opening_hours")
-    private OpeningHours openingHours;
-    @SerializedName("plus_code")
-    private PlusCode plusCode;
-    @SerializedName("rating")
-    private Double rating;
-    @SerializedName("price_level")
-    private int priceLevel;
+	@SerializedName("website")
+	private String website;
 
-    public final static Parcelable.Creator<Result> CREATOR = new Creator<Result>() {
+	@SerializedName("icon")
+	private String icon;
 
+	@SerializedName("rating")
+	private Double rating;
 
+	@SerializedName("address_components")
+	private List<AddressComponentsItem> addressComponents;
 
-        public Result createFromParcel(Parcel in) {
-            Result instance = new Result();
-            instance.geometry = ((Geometry) in.readValue((Geometry.class.getClassLoader())));
-            instance.icon = ((String) in.readValue((String.class.getClassLoader())));
-            instance.id = ((String) in.readValue((String.class.getClassLoader())));
-            instance.name = ((String) in.readValue((String.class.getClassLoader())));
-            in.readList(instance.photos, (com.example.mohamed.reachyourspot.models.Photo.class.getClassLoader()));
-            instance.placeId = ((String) in.readValue((String.class.getClassLoader())));
-            instance.reference = ((String) in.readValue((String.class.getClassLoader())));
-            instance.scope = ((String) in.readValue((String.class.getClassLoader())));
-            in.readList(instance.types, (java.lang.String.class.getClassLoader()));
-            instance.vicinity = ((String) in.readValue((String.class.getClassLoader())));
-            instance.openingHours = ((OpeningHours) in.readValue((OpeningHours.class.getClassLoader())));
-            instance.plusCode = ((PlusCode) in.readValue((PlusCode.class.getClassLoader())));
-            instance.rating = ((Double) in.readValue((Double.class.getClassLoader())));
-            instance.priceLevel = ((int) in.readValue((int.class.getClassLoader())));
-            return instance;
-        }
+	@SerializedName("url")
+	private String url;
 
-        public Result[] newArray(int size) {
-            return (new Result[size]);
-        }
+	@SerializedName("reference")
+	private String reference;
 
-    }
-    ;
+	@SerializedName("reviews")
+	private ArrayList<ReviewsItem> reviews;
 
-    /**
-     * 
-     * @return
-     *     The geometry
-     */
-    public Geometry getGeometry() {
-        return geometry;
-    }
+	@SerializedName("scope")
+	private String scope;
 
-    /**
-     * 
-     * @param geometry
-     *     The geometry
-     */
-    public void setGeometry(Geometry geometry) {
-        this.geometry = geometry;
-    }
+	@SerializedName("name")
+	private String name;
 
-    /**
-     * 
-     * @return
-     *     The icon
-     */
-    public String getIcon() {
-        return icon;
-    }
+	@SerializedName("opening_hours")
+	private OpeningHours openingHours;
 
-    /**
-     * 
-     * @param icon
-     *     The icon
-     */
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
+	@SerializedName("geometry")
+	private Geometry geometry;
 
-    /**
-     * 
-     * @return
-     *     The id
-     */
-    public String getId() {
-        return id;
-    }
+	@SerializedName("vicinity")
+	private String vicinity;
 
-    /**
-     * 
-     * @param id
-     *     The id
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
+	@SerializedName("id")
+	private String id;
 
-    /**
-     * 
-     * @return
-     *     The name
-     */
-    public String getName() {
-        return name;
-    }
+	@SerializedName("adr_address")
+	private String adrAddress;
 
-    /**
-     * 
-     * @param name
-     *     The name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+	@SerializedName("plus_code")
+	private PlusCode plusCode;
 
-    /**
-     * 
-     * @return
-     *     The photos
-     */
-    public List<Photo> getPhotos() {
-        return photos;
-    }
+	@SerializedName("formatted_phone_number")
+	private String formattedPhoneNumber;
 
-    /**
-     * 
-     * @param photos
-     *     The photos
-     */
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
-    }
+	@SerializedName("international_phone_number")
+	private String internationalPhoneNumber;
 
-    /**
-     * 
-     * @return
-     *     The placeId
-     */
-    public String getPlaceId() {
-        return placeId;
-    }
+	@SerializedName("place_id")
+	private String placeId;
 
-    /**
-     * 
-     * @param placeId
-     *     The place_id
-     */
-    public void setPlaceId(String placeId) {
-        this.placeId = placeId;
-    }
+	public void setUtcOffset(int utcOffset){
+		this.utcOffset = utcOffset;
+	}
 
-    /**
-     * 
-     * @return
-     *     The reference
-     */
-    public String getReference() {
-        return reference;
-    }
+	public int getUtcOffset(){
+		return utcOffset;
+	}
 
-    /**
-     * 
-     * @param reference
-     *     The reference
-     */
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
+	public void setFormattedAddress(String formattedAddress){
+		this.formattedAddress = formattedAddress;
+	}
 
-    /**
-     * 
-     * @return
-     *     The scope
-     */
-    public String getScope() {
-        return scope;
-    }
+	public String getFormattedAddress(){
+		return formattedAddress;
+	}
 
-    /**
-     * 
-     * @param scope
-     *     The scope
-     */
-    public void setScope(String scope) {
-        this.scope = scope;
-    }
+	public void setTypes(ArrayList<String> types){
+		this.types = types;
+	}
 
-    /**
-     * 
-     * @return
-     *     The types
-     */
-    public List<String> getTypes() {
-        return types;
-    }
+	public ArrayList<String> getTypes(){
+		return types;
+	}
 
-    /**
-     * 
-     * @param types
-     *     The types
-     */
-    public void setTypes(List<String> types) {
-        this.types = types;
-    }
+	public void setWebsite(String website){
+		this.website = website;
+	}
 
-    /**
-     * 
-     * @return
-     *     The vicinity
-     */
-    public String getVicinity() {
-        return vicinity;
-    }
+	public String getWebsite(){
+		return website;
+	}
 
-    /**
-     * 
-     * @param vicinity
-     *     The vicinity
-     */
-    public void setVicinity(String vicinity) {
-        this.vicinity = vicinity;
-    }
+	public void setIcon(String icon){
+		this.icon = icon;
+	}
 
-    /**
-     * 
-     * @return
-     *     The openingHours
-     */
-    public OpeningHours getOpeningHours() {
-        return openingHours;
-    }
+	public String getIcon(){
+		return icon;
+	}
 
-    /**
-     * 
-     * @param openingHours
-     *     The opening_hours
-     */
-    public void setOpeningHours(OpeningHours openingHours) {
-        this.openingHours = openingHours;
-    }
+	public void setRating(Double rating){
+		this.rating = rating;
+	}
 
-    /**
-     * 
-     * @return
-     *     The plusCode
-     */
-    public PlusCode getPlusCode() {
-        return plusCode;
-    }
+	public Double getRating(){
+		return rating;
+	}
 
-    /**
-     * 
-     * @param plusCode
-     *     The plus_code
-     */
-    public void setPlusCode(PlusCode plusCode) {
-        this.plusCode = plusCode;
-    }
+	public void setAddressComponents(List<AddressComponentsItem> addressComponents){
+		this.addressComponents = addressComponents;
+	}
 
-    /**
-     * 
-     * @return
-     *     The rating
-     */
-    public Double getRating() {
-        return rating;
-    }
+	public List<AddressComponentsItem> getAddressComponents(){
+		return addressComponents;
+	}
 
-    /**
-     * 
-     * @param rating
-     *     The rating
-     */
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
+	public void setUrl(String url){
+		this.url = url;
+	}
 
-    /**
-     * 
-     * @return
-     *     The priceLevel
-     */
-    public int getPriceLevel() {
-        return priceLevel;
-    }
+	public String getUrl(){
+		return url;
+	}
 
-    /**
-     * 
-     * @param priceLevel
-     *     The price_level
-     */
-    public void setPriceLevel(int priceLevel) {
-        this.priceLevel = priceLevel;
-    }
+	public void setReference(String reference){
+		this.reference = reference;
+	}
 
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(geometry);
-        dest.writeValue(icon);
-        dest.writeValue(id);
-        dest.writeValue(name);
-        dest.writeList(photos);
-        dest.writeValue(placeId);
-        dest.writeValue(reference);
-        dest.writeValue(scope);
-        dest.writeList(types);
-        dest.writeValue(vicinity);
-        dest.writeValue(openingHours);
-        dest.writeValue(plusCode);
-        dest.writeValue(rating);
-        dest.writeValue(priceLevel);
-    }
+	public String getReference(){
+		return reference;
+	}
 
-    public int describeContents() {
-        return  0;
-    }
+	public void setReviews(ArrayList<ReviewsItem> reviews){
+		this.reviews = reviews;
+	}
 
+	public ArrayList<ReviewsItem> getReviews(){
+		return reviews;
+	}
+
+	public void setScope(String scope){
+		this.scope = scope;
+	}
+
+	public String getScope(){
+		return scope;
+	}
+
+	public void setName(String name){
+		this.name = name;
+	}
+
+	public String getName(){
+		return name;
+	}
+
+	public void setOpeningHours(OpeningHours openingHours){
+		this.openingHours = openingHours;
+	}
+
+	public OpeningHours getOpeningHours(){
+		return openingHours;
+	}
+
+	public void setGeometry(Geometry geometry){
+		this.geometry = geometry;
+	}
+
+	public Geometry getGeometry(){
+		return geometry;
+	}
+
+	public void setVicinity(String vicinity){
+		this.vicinity = vicinity;
+	}
+
+	public String getVicinity(){
+		return vicinity;
+	}
+
+	public void setId(String id){
+		this.id = id;
+	}
+
+	public String getId(){
+		return id;
+	}
+
+	public void setAdrAddress(String adrAddress){
+		this.adrAddress = adrAddress;
+	}
+
+	public String getAdrAddress(){
+		return adrAddress;
+	}
+
+	public void setPlusCode(PlusCode plusCode){
+		this.plusCode = plusCode;
+	}
+
+	public PlusCode getPlusCode(){
+		return plusCode;
+	}
+
+	public void setFormattedPhoneNumber(String formattedPhoneNumber){
+		this.formattedPhoneNumber = formattedPhoneNumber;
+	}
+
+	public String getFormattedPhoneNumber(){
+		return formattedPhoneNumber;
+	}
+
+	public void setInternationalPhoneNumber(String internationalPhoneNumber){
+		this.internationalPhoneNumber = internationalPhoneNumber;
+	}
+
+	public String getInternationalPhoneNumber(){
+		return internationalPhoneNumber;
+	}
+
+	public void setPlaceId(String placeId){
+		this.placeId = placeId;
+	}
+
+	public String getPlaceId(){
+		return placeId;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"Result{" + 
+			"utc_offset = '" + utcOffset + '\'' + 
+			",formatted_address = '" + formattedAddress + '\'' + 
+			",types = '" + types + '\'' + 
+			",website = '" + website + '\'' + 
+			",icon = '" + icon + '\'' + 
+			",rating = '" + rating + '\'' + 
+			",address_components = '" + addressComponents + '\'' + 
+			",url = '" + url + '\'' + 
+			",reference = '" + reference + '\'' + 
+			",reviews = '" + reviews + '\'' + 
+			",scope = '" + scope + '\'' + 
+			",name = '" + name + '\'' + 
+			",opening_hours = '" + openingHours + '\'' + 
+			",geometry = '" + geometry + '\'' + 
+			",vicinity = '" + vicinity + '\'' + 
+			",id = '" + id + '\'' + 
+			",adr_address = '" + adrAddress + '\'' + 
+			",plus_code = '" + plusCode + '\'' + 
+			",formatted_phone_number = '" + formattedPhoneNumber + '\'' + 
+			",international_phone_number = '" + internationalPhoneNumber + '\'' + 
+			",place_id = '" + placeId + '\'' + 
+			"}";
+		}
 }

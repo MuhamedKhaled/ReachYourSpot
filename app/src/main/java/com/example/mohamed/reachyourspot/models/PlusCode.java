@@ -1,79 +1,37 @@
-
 package com.example.mohamed.reachyourspot.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PlusCode implements Parcelable
-{
+public class PlusCode{
 
-    @SerializedName("compound_code")
-    private String compoundCode;
-    @SerializedName("global_code")
-    private String globalCode;
-    public final static Parcelable.Creator<PlusCode> CREATOR = new Creator<PlusCode>() {
+	@SerializedName("compound_code")
+	private String compoundCode;
 
+	@SerializedName("global_code")
+	private String globalCode;
 
+	public void setCompoundCode(String compoundCode){
+		this.compoundCode = compoundCode;
+	}
 
-        public PlusCode createFromParcel(Parcel in) {
-            PlusCode instance = new PlusCode();
-            instance.compoundCode = ((String) in.readValue((String.class.getClassLoader())));
-            instance.globalCode = ((String) in.readValue((String.class.getClassLoader())));
-            return instance;
-        }
+	public String getCompoundCode(){
+		return compoundCode;
+	}
 
-        public PlusCode[] newArray(int size) {
-            return (new PlusCode[size]);
-        }
+	public void setGlobalCode(String globalCode){
+		this.globalCode = globalCode;
+	}
 
-    }
-    ;
+	public String getGlobalCode(){
+		return globalCode;
+	}
 
-    /**
-     * 
-     * @return
-     *     The compoundCode
-     */
-    public String getCompoundCode() {
-        return compoundCode;
-    }
-
-    /**
-     * 
-     * @param compoundCode
-     *     The compound_code
-     */
-    public void setCompoundCode(String compoundCode) {
-        this.compoundCode = compoundCode;
-    }
-
-    /**
-     * 
-     * @return
-     *     The globalCode
-     */
-    public String getGlobalCode() {
-        return globalCode;
-    }
-
-    /**
-     * 
-     * @param globalCode
-     *     The global_code
-     */
-    public void setGlobalCode(String globalCode) {
-        this.globalCode = globalCode;
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(compoundCode);
-        dest.writeValue(globalCode);
-    }
-
-    public int describeContents() {
-        return  0;
-    }
-
+	@Override
+ 	public String toString(){
+		return 
+			"PlusCode{" + 
+			"compound_code = '" + compoundCode + '\'' + 
+			",global_code = '" + globalCode + '\'' + 
+			"}";
+		}
 }

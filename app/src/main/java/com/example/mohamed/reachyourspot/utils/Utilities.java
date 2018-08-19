@@ -29,7 +29,7 @@ public class Utilities {
                 * Math.sin(longitudeDistance / 2) * Math.sin(longitudeDistance / 2);
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-//         convert to meters
+//         convert to Km
         double distance = radiusOfEarth * c ;
         distance = Math.pow(distance, 2) + Math.pow(0.0, 2);
 

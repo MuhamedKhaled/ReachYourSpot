@@ -18,7 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohamed.reachyourspot.R;
+import com.example.mohamed.reachyourspot.activities.PlaceDetailActivity;
 import com.example.mohamed.reachyourspot.models.Place;
+import com.example.mohamed.reachyourspot.utils.Constants;
 import com.example.mohamed.reachyourspot.utils.Utilities;
 
 import java.util.ArrayList;
@@ -135,12 +137,13 @@ public class NearPlacesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public void onClick(View v) {
 
             if (Utilities.isNetworkAvailable(mContext)) {
-                Toast.makeText(v.getContext(),"Here",Toast.LENGTH_SHORT).show();
 
-//                Intent currentLocationDetailIntent = new Intent(mContext, PlaceDetailActivity.class);
-//                currentLocationDetailIntent.putExtra(GoogleApiUrl.LOCATION_ID_EXTRA_TEXT,
-//                        mNearByPlaceArrayList.get(mItemPosition).getPlaceId());
-//                mContext.startActivity(currentLocationDetailIntent);
+                Intent intent = new Intent(mContext, PlaceDetailActivity.class);
+                intent.putExtra(Constants.LOCATION_ID_EXTRA_TEXT,
+                        mNearByPlaceArrayList.get(mItemPosition).getPlaceId());
+                intent.putExtra(Constants.CURRENT_LOCATION_LAT,currentlat);
+                intent.putExtra(Constants.CURRENT_LOCATION_lNG,currentlog);
+                mContext.startActivity(intent);
 
             } else
                 Snackbar.make(mLocationIcon, R.string.no_connection_string,
