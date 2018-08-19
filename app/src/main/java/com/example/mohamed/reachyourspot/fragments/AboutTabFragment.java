@@ -317,7 +317,7 @@ public class AboutTabFragment extends Fragment implements OnMapReadyCallback {
         mGoogleMap = googleMap;
         CameraPosition cameraPosition = CameraPosition.builder()
                 .target(new LatLng(lat,lng))
-                .zoom(13)
+                .zoom(12)
                 .bearing(0)
                 .tilt(0)
                 .build();

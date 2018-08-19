@@ -196,12 +196,26 @@ public class Place implements Parcelable {
      **/
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+
         dest.writeString(mPlaceId);
-        dest.writeDouble(mPlaceLatitude);
-        dest.writeDouble(mPlaceLongitude);
+        if (mPlaceLatitude!=null)
+            dest.writeDouble(mPlaceLatitude);
+        else
+            dest.writeDouble(0.0);
+
+        if (mPlaceLongitude!=null)
+            dest.writeDouble(mPlaceLongitude);
+        else
+            dest.writeDouble(0.0);
+
+
         dest.writeString(mPlaceName);
         dest.writeString(mPlaceOpeningHourStatus);
-        dest.writeDouble(mPlaceRating);
+        if (mPlaceRating!=null)
+            dest.writeDouble(mPlaceRating);
+        else
+            dest.writeDouble(0.0);
+
         dest.writeString(mPlaceAddress);
     }
 

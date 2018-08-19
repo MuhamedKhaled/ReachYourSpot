@@ -1,7 +1,10 @@
 package com.example.mohamed.reachyourspot.activities;
 
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
@@ -77,34 +80,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
 
             case R.id.location_favourite_icon:
-                Toast.makeText(this," Favourite Activity",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(MainActivity.this, FavouritePlaceActivity.class));
                 mDrawerLayout.closeDrawers();
                 break;
 
             case R.id.share_icon:
-//                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//                shareIntent.setType("text/plain");
-//                shareIntent.putExtra(Intent.EXTRA_TEXT, "Hey, Checkout AroundMe Application");
-//                startActivity(Intent.createChooser(shareIntent, "Share App.."));
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Hey, Checkout ReachYourSpot Application");
+                startActivity(Intent.createChooser(shareIntent, "Share App.."));
                 Toast.makeText(this,"Share",Toast.LENGTH_LONG).show();
                 mDrawerLayout.closeDrawers();
                 break;
 
             case R.id.feedback_icon:
-//                Intent mailToIntent = new Intent(Intent.ACTION_SEND);
-//                mailToIntent.setData(Uri.parse("mailto:"));
-//                mailToIntent.setType("text/plain");
-//                mailToIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"css08740@gmail.com"});
-//                startActivity(Intent.createChooser(mailToIntent, "Send Mail.."));
+                Intent mailToIntent = new Intent(Intent.ACTION_SEND);
+                mailToIntent.setData(Uri.parse("mailto:"));
+                mailToIntent.setType("text/plain");
+                mailToIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"mo7amed_tions2010@yahoo.com"});
+                startActivity(Intent.createChooser(mailToIntent, "Send Mail.."));
                 Toast.makeText(this,"FeedBack",Toast.LENGTH_LONG).show();
                 mDrawerLayout.closeDrawers();
                 break;
 
             case R.id.about_icon:
-//                Dialog aboutDialog = new Dialog(HomeScreenActivity.this, R.style.AboutDialog);
-//                aboutDialog.setTitle(getString(R.string.about));
-//                aboutDialog.setContentView(R.layout.about_dialog);
-//                aboutDialog.show();
+                Dialog aboutDialog = new Dialog(MainActivity.this, R.style.AboutDialog);
+                aboutDialog.setTitle(getString(R.string.about));
+                aboutDialog.setContentView(R.layout.about_dialog);
+                aboutDialog.show();
                 Toast.makeText(this,"about",Toast.LENGTH_LONG).show();
                 mDrawerLayout.closeDrawers();
                 break;
@@ -118,15 +121,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Inflate menu to add items to action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
         menu.removeItem(R.id.share_icon);
-
-        // Associate searchable configuration with the SearchView
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-
-//        searchView.setQueryHint(getString(R.string.search_hint));
-//
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(
-//                new ComponentName(this, PlaceSearchResultActivity.class)));
 
         return true;
     }

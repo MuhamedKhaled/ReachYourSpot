@@ -143,10 +143,11 @@
     <string name="feedback">Feedback</string>
     <string name="about">About</string>
     <string name="version_text">Version 1.0</string>
-    <string name="developed_by_text">Developed By: Chandan Sharma</string>
+    <string name="developed_by_text">Developed By: Muhamed khaled</string>
 
     <string name="gps_permission_title">Turn On GPS</string>
     <string name="gps_permission_message">Hi there! Please turn on GPS to detect current location.</string>
     <string name="retry">Retry</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_favourite_place">FavouritePlaceActivity</string>
 </resources>

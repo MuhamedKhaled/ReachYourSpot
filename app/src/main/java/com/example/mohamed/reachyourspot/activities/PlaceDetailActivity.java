@@ -20,6 +20,7 @@ import com.example.mohamed.reachyourspot.R;
 import com.example.mohamed.reachyourspot.Retrofit.RetrofitInterface;
 import com.example.mohamed.reachyourspot.Retrofit.ServiceGenerator;
 import com.example.mohamed.reachyourspot.fragments.AboutTabFragment;
+import com.example.mohamed.reachyourspot.fragments.PlaceReviewFragment;
 import com.example.mohamed.reachyourspot.models.DetailsResponse;
 import com.example.mohamed.reachyourspot.models.MyPlace;
 import com.example.mohamed.reachyourspot.models.Place;
@@ -53,8 +54,8 @@ public class PlaceDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_place_detail);
 
         currentPlaceDetailId = getIntent().getStringExtra(Constants.LOCATION_ID_EXTRA_TEXT);
-        lat = getIntent().getDoubleExtra(Constants.CURRENT_LOCATION_LAT,0.0);
-        lng = getIntent().getDoubleExtra(Constants.CURRENT_LOCATION_lNG,0.0);
+        lat = getIntent().getDoubleExtra(Constants.CURRENT_LOCATION_LAT,30.0316702);
+        lng = getIntent().getDoubleExtra(Constants.CURRENT_LOCATION_lNG,31.2408997);
 
         Toolbar actionBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(actionBar);
@@ -230,9 +231,9 @@ public class PlaceDetailActivity extends AppCompatActivity {
                     placeAboutDetailFragment.setLatAndLng(lat,lng);
                     return placeAboutDetailFragment;
                 case 1:
-//                    PlaceReviewDetail placeReviewDetailFragment = new PlaceReviewDetail();
-//                    placeReviewDetailFragment.setArguments(placeReviewFragmentBundle);
-//                    return placeReviewDetailFragment;
+                    PlaceReviewFragment placeReviewDetailFragment = new PlaceReviewFragment();
+                    placeReviewDetailFragment.setArguments(placeReviewFragmentBundle);
+                    return placeReviewDetailFragment;
             }
             return new Fragment();
         }
