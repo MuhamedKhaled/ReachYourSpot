@@ -86,7 +86,7 @@ public class MainSpotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @Override
         public void onClick(View v) {
 
-            if (Utilities.isNetworkAvailable(mContext)) {
+            if (Utilities.isNetworkAvailableWithAsyncTask(mContext)) {
                 String locationTag = mPlacesListTag[mItemPosition];
 
                 if (locationTag.equals("Bus Stand"))

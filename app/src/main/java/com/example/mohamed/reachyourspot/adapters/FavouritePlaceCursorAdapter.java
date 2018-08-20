@@ -122,7 +122,7 @@ public class FavouritePlaceCursorAdapter extends CursorRecyclerViewAdapter{
 
         @Override
         public void onClick(View v) {
-            if (Utilities.isNetworkAvailable(v.getContext())) {
+            if (Utilities.isNetworkAvailableWithAsyncTask(v.getContext())) {
                 Intent currentLocationDetailIntent = new Intent(mContext, PlaceDetailActivity.class);
                 currentLocationDetailIntent.putExtra(Constants.LOCATION_ID_EXTRA_TEXT,
                         mCurrentDataCursor.getString(

@@ -6,6 +6,9 @@ import android.net.NetworkInfo;
 
 public class Utilities {
 
+    public static Boolean mConnection=false;
+
+
     public static boolean isNetworkAvailable(Context mContext) {
 
         ConnectivityManager connectivityManager = (ConnectivityManager)
@@ -14,6 +17,19 @@ public class Utilities {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
+    public static boolean isNetworkAvailableWithAsyncTask(Context mContext) {
+      NetworkCalls networkCalls = new NetworkCalls(mContext, new myInteface() {
+          @Override
+          public void myMethod(Integer result) {
+              if (result==1)
+                  mConnection = true;
+          }
+      });
+      networkCalls.execute();
+      return mConnection;
+    }
+
+
 
     public static Double getDistanceFromLatLonInKm(Double firstPointLatitude,
                                                    Double firstPointLongitude,

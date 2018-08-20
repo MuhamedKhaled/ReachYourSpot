@@ -21,6 +21,7 @@ import com.example.mohamed.reachyourspot.R;
 import com.example.mohamed.reachyourspot.activities.PlaceDetailActivity;
 import com.example.mohamed.reachyourspot.models.Place;
 import com.example.mohamed.reachyourspot.utils.Constants;
+import com.example.mohamed.reachyourspot.utils.NetworkCalls;
 import com.example.mohamed.reachyourspot.utils.Utilities;
 
 import java.util.ArrayList;
@@ -136,8 +137,7 @@ public class NearPlacesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         @Override
         public void onClick(View v) {
 
-            if (Utilities.isNetworkAvailable(mContext)) {
-
+            if (Utilities.isNetworkAvailableWithAsyncTask(mContext)) {
                 Intent intent = new Intent(mContext, PlaceDetailActivity.class);
                 intent.putExtra(Constants.LOCATION_ID_EXTRA_TEXT,
                         mNearByPlaceArrayList.get(mItemPosition).getPlaceId());
