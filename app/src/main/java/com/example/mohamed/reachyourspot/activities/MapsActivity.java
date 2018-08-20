@@ -139,12 +139,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         RetrofitInterface mService=
                 ServiceGenerator.createService(RetrofitInterface.class);
 
-        Log.d("here", url);
-
         mService.getPlaces(url).enqueue(new Callback<MyPlace>() {
             @Override
             public void onResponse(@NonNull Call<MyPlace> call, @NonNull Response<MyPlace> response) {
-                Log.d("here", Integer.toString(response.body().getResults().size()));
                 if (response.isSuccessful()) {
                     addMarksOnMap(response.body());
                 }
@@ -214,7 +211,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private boolean checkLocationPermission() {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
+                != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
                 ActivityCompat.requestPermissions(this, new String[]{
                         Manifest.permission.ACCESS_FINE_LOCATION
@@ -246,7 +243,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     }
                 } else
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.permission_denied), Toast.LENGTH_SHORT).show();
 
             }
             break;
@@ -278,7 +275,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         mMap.getUiSettings().isMyLocationButtonEnabled();
-        //nearByPlace(mLocationTag);
 
 
     }
@@ -327,7 +323,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         latitude = location.getLatitude();
         longitude = location.getLongitude();
-            Log.d("eshta", "onLocationChanged: "+latitude+" " +longitude);
         LatLng latLng = new LatLng(latitude,longitude);
         MarkerOptions markerOptions = new MarkerOptions().position(latLng)
                     .title("Your Location")

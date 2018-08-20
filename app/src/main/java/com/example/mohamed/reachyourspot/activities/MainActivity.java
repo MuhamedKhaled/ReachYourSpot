@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_TEXT, "Hey, Checkout ReachYourSpot Application");
                 startActivity(Intent.createChooser(shareIntent, "Share App.."));
-                Toast.makeText(this,"Share",Toast.LENGTH_LONG).show();
                 mDrawerLayout.closeDrawers();
                 break;
 
@@ -99,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mailToIntent.setType("text/plain");
                 mailToIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"mo7amed_tions2010@yahoo.com"});
                 startActivity(Intent.createChooser(mailToIntent, "Send Mail.."));
-                Toast.makeText(this,"FeedBack",Toast.LENGTH_LONG).show();
                 mDrawerLayout.closeDrawers();
                 break;
 
@@ -108,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 aboutDialog.setTitle(getString(R.string.about));
                 aboutDialog.setContentView(R.layout.about_dialog);
                 aboutDialog.show();
-                Toast.makeText(this,"about",Toast.LENGTH_LONG).show();
                 mDrawerLayout.closeDrawers();
                 break;
         }

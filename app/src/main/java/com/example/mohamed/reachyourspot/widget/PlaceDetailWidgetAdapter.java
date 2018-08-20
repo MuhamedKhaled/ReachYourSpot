@@ -32,6 +32,7 @@ public class PlaceDetailWidgetAdapter implements RemoteViewsService.RemoteViewsF
 
     @Override
     public void onDataSetChanged() {
+
     }
 
     @Override
@@ -41,6 +42,7 @@ public class PlaceDetailWidgetAdapter implements RemoteViewsService.RemoteViewsF
 
     @Override
     public int getCount() {
+        if (mFavouritePlaceArrayList == null) return 0;
         return mFavouritePlaceArrayList.size();
     }
 

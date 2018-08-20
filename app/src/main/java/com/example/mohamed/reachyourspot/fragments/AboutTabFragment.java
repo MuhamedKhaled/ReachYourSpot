@@ -94,7 +94,6 @@ public class AboutTabFragment extends Fragment implements OnMapReadyCallback {
                     setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_favorite_border_white));
         }
 
-        // TODO : call place
         handleOnPhoneCallClicked(rootView);
         handleOnOPenSite(rootView);
         handleOnFavIconClicked(rootView);
@@ -102,6 +101,25 @@ public class AboutTabFragment extends Fragment implements OnMapReadyCallback {
         return rootView;
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Double latitude = lat , longtiude=lng;
+        outState.putDouble("lat",latitude);
+        outState.putDouble("lng",longtiude);
+
+
+    }
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null) {
+            lat = savedInstanceState.getDouble("lat");
+            lng = savedInstanceState.getDouble("lng");
+
+
+        }
+    }
     private boolean isPlaceStoreInDatabase(String placeId) {
         //Uri for requesting data from database
         Uri placeContentUri = PlaceDetailEntry.CONTENT_URI;
