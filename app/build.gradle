@@ -7,7 +7,7 @@ android {
         config {
             keyAlias 'key0'
             keyPassword '123456789'
-            storeFile file('/home/mohamed/AndroidStudioProjects/ReachYourSpot/ReachYourSpot_key.jks')
+            storeFile file('../ReachYourSpot_key.jks')
             storePassword '123456789'
         }
     }
